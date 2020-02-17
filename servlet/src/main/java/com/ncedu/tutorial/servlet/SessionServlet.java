@@ -13,26 +13,26 @@ public class SessionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         // set response headers
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
-        // create HTML form
+        // set HTML page
         PrintWriter writer = response.getWriter();
-        writer.append("<!DOCTYPE html>\r\n")
-                .append("<html>\r\n")
-                .append("		<head>\r\n")
-                .append("			<title>Form input</title>\r\n")
-                .append("		</head>\r\n")
-                .append("		<body>\r\n")
-                .append("			<form action=\"session\" method=\"POST\">\r\n")
-                .append("				Enter your note: \r\n")
-                .append("				<input type=\"text\" name=\"note\" />\r\n")
-                .append("				<input type=\"submit\" value=\"Submit\" />\r\n")
-                .append("			</form>\r\n")
-                .append("		</body>\r\n")
-                .append("</html>\r\n");
+        writer.append("" +
+                "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "\t<title>Form input</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "\t<form action=\"session\" method=\"POST\">\n" +
+                "\t\tEnter your note:\n" +
+                "\t\t<input type=\"text\" name=\"note\"/>\n" +
+                "\t\t<input type=\"submit\" value=\"Submit\"/>\n" +
+                "\t</form>\n" +
+                "</body>\n" +
+                "</html>");
     }
 
     @Override
@@ -44,30 +44,32 @@ public class SessionServlet extends HttpServlet {
             session.setAttribute("count", 0);
         }
 
-        session.setAttribute("count", ((Integer) session.getAttribute("count")) + 1);
-        session.getAttribute("count");
+        int currentCount = (Integer) session.getAttribute("count");
+        session.setAttribute("count",  currentCount + 1);
 
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
-        // create HTML response
         PrintWriter writer = response.getWriter();
-        writer.append("<!DOCTYPE html>\r\n")
-                .append("<html>\r\n")
-                .append("		<head>\r\n")
-                .append("			<title>Welcome message</title>\r\n")
-                .append("		</head>\r\n")
-                .append("		<body>\r\n");
+        writer.append(
+                "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "\t<title>Welcome message</title>\n" +
+                "</head>\n" +
+                "\t<body>");
 
         if (note != null && !note.trim().isEmpty()) {
-            writer.append("	You added note:")
+            writer.append("You added a note:")
                     .append(note)
                     .append(". It is note #")
                     .append(session.getAttribute("count").toString());
         } else {
-            writer.append("	You did not entered note!\r\n");
+            writer.append("You did not entered note!\n");
         }
-        writer.append("		</body>\r\n")
-                .append("</html>\r\n");
+
+        writer.append(
+                "</body>\n" +
+                "</html>");
     }
 }

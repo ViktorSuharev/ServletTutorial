@@ -5,11 +5,20 @@
          version="3.0">
 
     <servlet>
-        <servlet-name>ContactJsp</servlet-name>
+        <servlet-name>helloJsp</servlet-name>
+        <jsp-file>/hello.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>sessionJsp</servlet-name>
         <jsp-file>/session.jsp</jsp-file>
     </servlet>
+
     <servlet-mapping>
-        <servlet-name>ContactJsp</servlet-name>
+        <servlet-name>helloJsp</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sessionJsp</servlet-name>
         <url-pattern>/session</url-pattern>
     </servlet-mapping>
 

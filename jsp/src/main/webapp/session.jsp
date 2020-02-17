@@ -1,5 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
     <title>Increment</title>
@@ -14,26 +12,22 @@
 
 <%
     HttpSession httpSession = request.getSession();
-    Integer count = (Integer) httpSession.getAttribute("count");
+    if (httpSession.getAttribute("count") == null) {
+        httpSession.setAttribute("count", 1);
+    }
+
+    int count = (Integer) httpSession.getAttribute("count");
 
     String note = request.getParameter("note");
 %>
 
-
-<% if (note != null) { %>
-    <p>You added note: </p>
-    <%= note %>
+<% if (note == null && count != 1) { %>
+    <p>You did not entered note!</p>
+<% } else if (note != null) { %>
+    <p>You added note: <%= note %></p>
+    <p>It is note # <%= count %></p>
+    <% httpSession.setAttribute("count", count + 1); %>
 <% } %>
-
-<% if (count != null) { %>
-    <p>It is note #</p>
-    <%= count %>
-<% } %>
-
-<%
-    count = 0;
-    httpSession.setAttribute("count", count + 1);
-%>
 
 </body>
 </html>

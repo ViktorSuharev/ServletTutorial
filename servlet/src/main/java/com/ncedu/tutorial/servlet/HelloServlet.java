@@ -10,9 +10,7 @@ public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         PrintWriter out = response.getWriter();
-        out.print("<h1>Hello Servlet</h1>");
-
+        out.print("<h1>Hello " + request.getParameter("name") + " </h1>");
     }
 }
